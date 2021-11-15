@@ -1,0 +1,16 @@
+name: Test Container Upload
+on:
+  workflow_dispatch
+
+jobs:
+  build_test_upload:
+    runs_on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Image build
+      run: docker build -t ghcr.io/jwithers/first-action:latest .
+    - name: log in to the regisry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+      
+     
+

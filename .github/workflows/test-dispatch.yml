@@ -1,0 +1,16 @@
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'a name, any name'
+        required: true
+        default: 'This is a name'
+
+jobs:
+  echo_a_thing:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Name value is: ${{ github.event.inputs.name }}"
+        echo $GITHUB_SHA
+        echo $GITHUB_ACTOR

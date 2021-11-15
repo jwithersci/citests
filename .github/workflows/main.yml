@@ -1,0 +1,60 @@
+on:
+  pull_request:
+    types: [labeled]
+
+  push:
+    branches:
+      - main
+
+jobs:
+  base:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'ci:run')
+    name: Trigger Testing
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Show triggering event
+        run: echo 'Trigger event is ${{ github.event_name }}'
+#      - name: Nasty Hack To Get Right Docker Build Context
+#        run: cp ./.github/actions/docker_action/Dockerfile . && cp ./.github/actions/docker_action/action.yml .
+#     - name: Run Docker Tests
+#       uses: ./
+      - name: Show commit
+        run: git show -q
+      - name: Remove ci:run Tag
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'ci:run'
+            })
+      - name: add a file for testing
+        run: git show -q > .commitinfo
+      - name: adding commit
+        uses: EndBug/add-and-commit@3276c159cee23546e7fef9c8f9997e923587b543
+        with:
+          message: 'adding ci information'
+        
+      - name: troubleshooting
+        run: |
+          echo $GITHUB_ACTOR
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_REF
+          echo $GITHUB_TOKEN
+          echo $GITHUB_SHA
+          echo $GITHUB_HEAD_REF
+          
+#      - name: commit ci info file
+#        run: |
+#          git config --local user.email "$(git log --format='%ae' HEAD^!)"
+#          git config --local user.name "$(git log --format='%an' HEAD^!)"
+#          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+#          git pull github ${GITHUB_REF}
+#          git add .
+#          git commit -m "adding ci data"
+#          git push github HEAD:${GITHUB_HEAD_REF}

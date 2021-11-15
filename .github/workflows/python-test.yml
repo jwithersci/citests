@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch: {}
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+ #     - uses: actions/setup-python@v2
+      - uses: actions/checkout@v2
+      - name: run the script
+        run: |
+          echo "running python script"
+          ./python_check.py
+          echo "now from bash "
+          which python3
+          echo "bonus what python means:"
+          which python
+          
