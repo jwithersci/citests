@@ -1,14 +1,10 @@
 on:
-  pull_request:
-    types: [labeled]
-    branches:
-      - main
+  pull_request
 
 jobs:
   trivial:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'ci:test')
-    name: CI Machinery Tests
+    name: trivial
     steps:
       - name: show ci file
         run: echo "this file is checked in main"
