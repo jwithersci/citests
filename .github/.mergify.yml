@@ -3,6 +3,7 @@ pull_request_rules:
     conditions:
       - "#approved-reviews-by>=1"
       - check-success=trivial
+      - check-success=minor
       - label=ci:mergify
     actions:
       merge:

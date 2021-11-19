@@ -16,3 +16,9 @@ jobs:
           echo "GITHUB_REF:  $GITHUB_REF"
           echo "GITHUB_REPOSITORY:  $GITHUB_REPOSITORY"
           echo "GITHUB_SHA:  $GITHUB_SHA"
+  minor:
+    runs-on: ubuntu-latest
+    name: minor
+      steps:
+        - name: pointless echo
+          run: echo "minor job for testing"
