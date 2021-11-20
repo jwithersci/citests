@@ -1,0 +1,10 @@
+pull_request_rules:
+  - name: Automatic merge on approval
+    conditions:
+      - "#approved-reviews-by>=1"
+      - check-success=trivial
+      - check-success=minor
+      - label=ci:mergify
+    actions:
+      merge:
+        method: merge
