@@ -2,3 +2,4 @@ This is a trivial file for testing mergify.
 Change to trigger CI. Another.
 Trigger for feature6
 Trigger for feature8
+Trigger for feature9
