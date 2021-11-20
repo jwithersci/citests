@@ -19,6 +19,6 @@ jobs:
   minor:
     runs-on: ubuntu-latest
     name: minor
-      steps:
-        - name: pointless echo
-          run: echo "minor job for testing"
+    steps:
+      - name: pointless echo
+        run: echo "minor job for testing"
