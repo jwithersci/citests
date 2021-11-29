@@ -1,13 +1,21 @@
-pull_request_rules:
-  - name: Automatic merge on approval
+queue_rules:
+  - name: default
     conditions:
-      - "#approved-reviews-by>=1"
+      - label=ci:mergify
+    
+   
+pull_request_rules:
+  - name: push to default merge queue
+    conditions:
+      - base=main
       - check-success=trivial
       - check-success=minor
       - label=ci:mergify
     actions:
-      merge:
-        method: merge
+      queue:
+        name: default
+        require_branch_protection: true
+        method: squash
   - name: delete head branch after merge
     conditions:
       - merged
