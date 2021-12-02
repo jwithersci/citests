@@ -1,5 +1,7 @@
 queue_rules:
-  - name: default    
+  - name: default
+    conditions:
+      - base=main
    
 pull_request_rules:
   - name: push to default merge queue
