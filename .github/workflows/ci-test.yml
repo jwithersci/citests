@@ -1,9 +1,16 @@
 on:
-  pull_request
+  pull_request:
+    types: [labeled]
+    branches:
+      - main
+      
 
 jobs:
   trivial:
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify'))
     name: trivial
     steps:
       - name: show ci file
@@ -16,8 +23,12 @@ jobs:
           echo "GITHUB_REF:  $GITHUB_REF"
           echo "GITHUB_REPOSITORY:  $GITHUB_REPOSITORY"
           echo "GITHUB_SHA:  $GITHUB_SHA"
+          sleep 2m
   minor:
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify'))
     name: minor
     steps:
       - name: pointless echo
