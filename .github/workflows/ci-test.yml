@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify'))
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify')) ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger'))
     name: trivial
     steps:
       - name: show ci file
@@ -23,12 +24,14 @@ jobs:
           echo "GITHUB_REF:  $GITHUB_REF"
           echo "GITHUB_REPOSITORY:  $GITHUB_REPOSITORY"
           echo "GITHUB_SHA:  $GITHUB_SHA"
-          sleep 2m
+          sleep 1m
   minor:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify'))
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify')) ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger'))
+      
     name: minor
     steps:
       - name: pointless echo
