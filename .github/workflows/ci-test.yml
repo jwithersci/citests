@@ -11,7 +11,7 @@ jobs:
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify')) ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger')
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger'))
       
     name: trivial
     steps:
@@ -31,7 +31,7 @@ jobs:
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify')) ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger')
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger'))
       
     name: minor
     steps:
