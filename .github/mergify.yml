@@ -12,9 +12,9 @@ pull_request_rules:
         name: default
         require_branch_protection: true
         method: squash
-    label:
-      add:
-        - ci:trigger
+      label:
+        add:
+          - ci:trigger
    - name: remove mergify label
      conditions:
        - merged
