@@ -17,10 +17,10 @@ pull_request_rules:
           - ci:trigger
 
   - name: remove mergify label
-     conditions:
-       - merged
-     actions:
-       label:
-         remove:
-           -ci:trigger
+    conditions:
+      - merged
+    actions:
+      label:
+        remove:
+          - ci:trigger
 
