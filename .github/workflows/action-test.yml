@@ -15,5 +15,5 @@ jobs:
       - name: check object
         run: |
           cat << OBJECT
-          ${{ toJson(github.pull_request.statuses) }}
+          ${{ toJson(github.event) }}
           OBJECT
