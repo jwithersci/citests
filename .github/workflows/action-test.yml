@@ -1,0 +1,37 @@
+on:
+  pull_request:
+    types: [labeled]
+    branches:
+      - main
+      
+
+jobs:
+  trivial:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:action_test'))
+      
+    name: trivial
+    steps:
+      - name: show ci file
+        run: echo "this file is checked in main"
+      - name: show selected vars
+        run: |
+          echo "GITHUB_ACTOR: $GITHUB_ACTOR"
+          echo "GITHUB_HEAD_REF:  $GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF:  $GITHUB_BASE_REF"
+          echo "GITHUB_REF:  $GITHUB_REF"
+          echo "GITHUB_REPOSITORY:  $GITHUB_REPOSITORY"
+          echo "GITHUB_SHA:  $GITHUB_SHA"
+          sleep 30
+  minor:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:action_test'))
+      
+    name: minor
+    steps:
+      - name: pointless echo
+        run: echo "minor job for testing"
