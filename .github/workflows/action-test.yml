@@ -3,6 +3,7 @@ on:
     types: [labeled, synchronize]
     branches:
       - main
+  pull_request_review
       
 
 jobs:
