@@ -12,5 +12,8 @@ jobs:
       
     name: show github.event
     steps:
-      - name: Echo github.event
-        run: echo ${{ toJson(github) }}
+      - name: check object
+        run: |
+          cat << OBJECT
+          ${{ toJson(github) }}
+          OBJECT
