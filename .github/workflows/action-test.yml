@@ -4,13 +4,13 @@ on:
     branches:
       - main
   pull_request_review: {}
-  issues: {}
+#  issues: {}
       
 
 jobs:
   trivial:
     runs-on: ubuntu-latest
-#    if: contains(github.event.pull_request.labels.*.name, 'ci:action_test')
+    if: contains(github.event.pull_request.labels.*.name, 'ci:action_test')
       
     name: show github.event
     steps:
