@@ -1,11 +1,8 @@
 on:
   pull_request:
     types: [labeled, synchronize]
-#    branches:
-#      - main
-#  pull_request_review: {}
-  issues: {}
-      
+    branches:
+      - main
 
 jobs:
   trivial:
