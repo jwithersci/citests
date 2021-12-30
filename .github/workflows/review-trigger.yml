@@ -19,10 +19,11 @@ jobs:
     if: github.event.review.state == 'approved'
     steps:
       - uses: actions/github-script@v5
-        script: |
-          github.rest.issues.addLabels({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            labels: ['ci:reviewed']
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['ci:reviewed']
             })
