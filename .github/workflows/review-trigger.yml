@@ -1,0 +1,24 @@
+name: PR approved 
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  apply-label:
+    runs-on: ubuntu-latest
+    if: github.event.review.state == 'approved'
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - run: echo ${{ github.event.review.state }}
+      - uses: actions/github-script@v5
+        script: |
+          github.rest.issues.addLabels({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['ci:reviewed']
+            })
