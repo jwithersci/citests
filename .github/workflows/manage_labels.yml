@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/github-script@v5
         with:
-          github-token: ${{ secrets.TFLM_BOT_REPO_TOKEN }} 
+          github-token: ${{ secrets.BOT_TOKEN }} 
           script: |
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
@@ -30,7 +30,7 @@ jobs:
       - name: remove tags
         uses: actions/github-script@a3e7071a34d7e1f219a8a4de9a5e0a34d1ee1293
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.BOT_TOKEN}}
           script: |
             github.issues.removeLabel({
               issue_number: context.issue.number,
