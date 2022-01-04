@@ -10,6 +10,11 @@ jobs:
     if: github.event.review.state == 'approved'
 
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - run: echo ${{ github.event.review.state }}
       - name: save pr number
         run: |
           mkdir -p ./pr
