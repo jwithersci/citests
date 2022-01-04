@@ -2,12 +2,13 @@ queue_rules:
   - name: default
     conditions:
       - base=main
-      - label=ci:trigger
+      - label=ci:ready_to_merge
    
 pull_request_rules:
   - name: push to default merge queue
     conditions:
       - base=main
+      - label=ci:ready_to_merge
     actions:
       queue:
         name: default
@@ -20,5 +21,5 @@ pull_request_rules:
     actions:
       label:
         remove:
-          - ci:trigger
+          - ci:ready_to_merge
 
