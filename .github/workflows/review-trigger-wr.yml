@@ -1,4 +1,4 @@
-name: PR approved 
+name: WR approved
 
 on:
   workflow_run:
