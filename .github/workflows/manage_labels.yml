@@ -1,15 +1,30 @@
-name: Remove Labels
-
+name: Manage Labels
 on:
-#  pull_request_target:
-#    types: [labeled]
+  pull_request_target:
+    types:
+      - synchronize
+      - labeled
 
-  workflow_dispatch: {}
-  
 jobs:
+  apply_cirun:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ci:ready_to_merge'))
+    steps:
+      - uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.TFLM_BOT_REPO_TOKEN }} 
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['ci:run']
+            })
+
   label_cleanup:
     runs-on: ubuntu-latest
-
+    if: github.event.action == 'labeled'
     name: remove CI runner labels
     steps:
       - name: remove tags
@@ -27,7 +42,8 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              name: 'ci:mergify'
+              name: 'ci:test'
             })
         # Prevent erroring out if label doesn't exist
         continue-on-error: true
+

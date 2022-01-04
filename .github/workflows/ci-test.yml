@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify')) ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger'))
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:run'))
       
     name: trivial
     steps:
@@ -30,8 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:mergify')) ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:trigger'))
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:run'))
       
     name: minor
     steps:
