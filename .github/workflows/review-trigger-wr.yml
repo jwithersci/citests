@@ -5,11 +5,11 @@ on:
     workflows: ["PR approved"]
     types:
       - requested
+      - completed
 
 jobs:
   dump-object:
     runs-on: ubuntu-latest
-    if: github.event.review.state == 'approved'
     steps:
       - name: Dump GitHub context
         env:
