@@ -1,0 +1,20 @@
+name: Send PR
+on:
+  pull_request_target:
+    types: [labeled]
+
+jobs:
+  send_pr:
+    runs-on: ubuntu-latest
+    name: archive pr number
+    if: contains(github.event.pull_request.labels.*.name, 'ci:artifact')
+
+    steps:
+      - name: save pr number
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.number }} > ./pr/NR
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pr
+          path: pr/
