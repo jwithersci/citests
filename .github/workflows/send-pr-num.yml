@@ -1,13 +1,13 @@
 name: Send PR
 on:
-  pull_request_target:
-    types: [labeled]
+  pull_request_review:
+    types: [submitted]
 
 jobs:
   send_pr:
     runs-on: ubuntu-latest
     name: archive pr number
-    if: contains(github.event.pull_request.labels.*.name, 'ci:artifact')
+    if: github.event.review.state == 'approved'
 
     steps:
       - name: save pr number

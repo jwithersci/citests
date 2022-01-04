@@ -1,8 +1,9 @@
 name: PR approved 
 
 on:
-  pull_request_review:
-    types: [submitted]
+  workflow_dispatch: {}
+#  pull_request_review:
+#    types: [submitted]
 
 jobs:
   dump-object:
