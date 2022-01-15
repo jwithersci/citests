@@ -5,7 +5,7 @@ jobs:
   container_test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: |
-        echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u jwithers --password-stdin
-        docker run --rm -v `pwd`:/opt/tflite-micro ghcr.io/jwithers/test_stub:latest /opt/tflite-micro/entrypoint.sh
+      - uses: actions/checkout@v2
+      - run: |
+          echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u jwithers --password-stdin
+          docker run --rm -v `pwd`:/opt/tflite-micro ghcr.io/jwithers/test_stub:latest /opt/tflite-micro/entrypoint.sh
