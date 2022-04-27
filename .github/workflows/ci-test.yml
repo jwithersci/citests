@@ -33,5 +33,5 @@ jobs:
       
     name: minor
     steps:
-      - name: pointless echo
-        run: echo "minor job for testing"
+      - name: mergetest
+        run: scripts/mergetest.sh
