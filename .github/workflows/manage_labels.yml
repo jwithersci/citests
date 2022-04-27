@@ -1,9 +1,9 @@
 name: Manage Labels
 on:
-  pull_request_target:
-    types:
-      - synchronize
-      - labeled
+#  pull_request_target:
+#    types:
+#      - synchronize
+#      - labeled
 
 jobs:
   apply_cirun:
