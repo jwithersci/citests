@@ -33,5 +33,7 @@ jobs:
       
     name: minor
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
       - name: mergetest
         run: scripts/mergetest.sh
