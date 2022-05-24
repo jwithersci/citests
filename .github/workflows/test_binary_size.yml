@@ -30,4 +30,4 @@ jobs:
     - name: test checkout
       run: |
         ls -alh
-        git branch
+        git branch -al
