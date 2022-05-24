@@ -33,8 +33,13 @@ jobs:
         git config --local user.name 'jwithers'
         git config --local user.email 'jwithers@nowhere.tv'
         git branch -al
-        git checkout -b log_test origin/log_test
+        git checkout --track origin/log_test
         git status
+        git checkout main
+        git checkout log_test -- delete/
         echo `date` >> delete/tempfile
+        git commit -a -m "automated tempfile update"
+        git checkout log_test
+        git checkout main -- delete/
         git commit -a -m "automated tempfile update"
         git push
