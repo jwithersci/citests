@@ -30,6 +30,8 @@ jobs:
     - name: test checkout
       run: |
         ls -alh
+        git config --local user.name 'jwithers'
+        git config --local user.email 'jwithers@nowhere.tv'
         git branch -al
         git checkout -b log_test origin/log_test
         git status
