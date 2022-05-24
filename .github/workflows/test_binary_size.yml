@@ -31,3 +31,8 @@ jobs:
       run: |
         ls -alh
         git branch -al
+        git checkout -b log_test origin/log_test
+        git status
+        echo `date` >> delete/tempfile
+        git commit -a -m "automated tempfile update"
+        git push
