@@ -1,4 +1,4 @@
-name: Binary Size Log Test
+name: Binary Size Log PR Update
 
 on:
   workflow_dispatch: {}
