@@ -1,6 +1,6 @@
-on:
-  pull_request:
-    types: [synchronize, labeled]
+#on:
+#  pull_request:
+#    types: [synchronize, labeled]
 
 jobs:
   apply-label:

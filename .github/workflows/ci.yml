@@ -1,6 +1,8 @@
+name: CI
 on:
   pull_request:
-    types: [labeled, synchronize]
+#    types: [labeled, synchronize]
+    types: [labeled]
     branches:
       - main
       
@@ -14,8 +16,6 @@ jobs:
       
     name: trivial
     steps:
-      - name: show ci file
-        run: echo "this file is checked in main"
       - name: show selected vars
         run: |
           echo "GITHUB_ACTOR: $GITHUB_ACTOR"
@@ -24,16 +24,16 @@ jobs:
           echo "GITHUB_REF:  $GITHUB_REF"
           echo "GITHUB_REPOSITORY:  $GITHUB_REPOSITORY"
           echo "GITHUB_SHA:  $GITHUB_SHA"
-          sleep 1m
-  minor:
-    runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:run'))
-      
-    name: minor
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v2
-      - name: mergetest
-        run: scripts/mergetest.sh
+#          sleep 1m
+#  minor:
+#    runs-on: ubuntu-latest
+#    if: |
+#      github.event_name == 'workflow_dispatch' ||
+#      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:run'))
+#      
+#    name: minor
+#    steps:
+#      - name: checkout repo
+#        uses: actions/checkout@v2
+#      - name: mergetest
+#        run: scripts/mergetest.sh

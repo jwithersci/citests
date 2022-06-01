@@ -1,8 +1,8 @@
 name: Inspect Github 
 
-on:
-  pull_request_target:
-    types: [synchronize]
+#on:
+#  pull_request_target:
+#    types: [synchronize]
 #  pull_request_review:
 #    types: [submitted]
 
