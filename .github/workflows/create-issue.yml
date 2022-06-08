@@ -27,6 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUM: ${{ github.event.number }}
+          PR_LINK: ${{ github.event.pull_request._links.html.href }}
         with:
           assignees: ${{ github.event.pull_request.user.login }}
           filename: .github/ci-error-template.md
