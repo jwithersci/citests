@@ -6,7 +6,7 @@ on:
       
 
 jobs:
-  make issue:
+  make-issue:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'workflow_dispatch' ||
