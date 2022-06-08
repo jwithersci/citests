@@ -1,0 +1,21 @@
+name: create-issue
+on:
+  pull_request:
+#    types: [labeled, synchronize]
+    types: [labeled]
+    branches:
+      - main
+      
+
+jobs:
+  make issue:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:issue'))
+
+    name: dump context
+    steps:
+      env: GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: echo "$GITHUB_CONTEXT"
+      
