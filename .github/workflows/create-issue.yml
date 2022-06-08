@@ -19,4 +19,4 @@ jobs:
           ${{ toJson(github.event) }}
           OBJECT
       - name: callout PR user
-        run: echo ${github.event.pull_request.user}
+        run: echo ${{ github.event.pull_request.user.login }}
