@@ -14,6 +14,8 @@ jobs:
 
     steps:
       - name: dump context
-        env: GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: |
+          cat << OBJECT
+          ${{ toJson(github.event) }}
+          OBJECT
       
