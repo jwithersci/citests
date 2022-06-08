@@ -13,6 +13,8 @@ jobs:
       (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:issue'))
 
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
       - name: dump context
         run: |
           cat << OBJECT
