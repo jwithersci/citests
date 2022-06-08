@@ -20,3 +20,11 @@ jobs:
           OBJECT
       - name: callout PR user
         run: echo ${{ github.event.pull_request.user.login }}
+      - name: create issue
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUM: ${{ github.event.number }}
+        with:
+          assignees: ${{ github.event.pull_request.user.login }}
+          filename: .github/ci-error-template.md
