@@ -1,11 +1,9 @@
 name: Remove Labels
 
 on:
-#  pull_request_target:
-#    types: [labeled]
+  pull_request_target:
+    types: [labeled]
 
-  workflow_dispatch: {}
-  
 jobs:
   label_cleanup:
     runs-on: ubuntu-latest
@@ -27,7 +25,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              name: 'ci:mergify'
+              name: 'ci:test'
             })
         # Prevent erroring out if label doesn't exist
         continue-on-error: true
