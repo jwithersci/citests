@@ -26,7 +26,7 @@ jobs:
           echo "GITHUB_SHA:  $GITHUB_SHA"
       - name: optional error
         if: ${{ contains(github.event.pull_request.labels.*.name, 'ci:error') }}
-        run |
+        run: |
           echo "Error Condition Being Raised Now"
           exit 1
 
