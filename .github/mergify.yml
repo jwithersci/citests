@@ -17,11 +17,11 @@ pull_request_rules:
 
   - name: error reporting
     conditions:
-      - check-failure=trivial
+      - check-success=trivial
     actions:
       comment:
         message: >
-          Failure in {{check_failure}}. Click the details link beside the
+          Failure in {{check_success}}. Click the details link beside the
           appropriate entry in the check suite list below.
       label:
         add:
