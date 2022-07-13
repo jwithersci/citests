@@ -12,7 +12,6 @@ pull_request_rules:
     actions:
       queue:
         name: default
-        require_branch_protection: true
         method: squash
 
   - name: error reporting
