@@ -9,7 +9,7 @@ pull_request_rules:
     conditions:
       - base=main
       - label=ci:ready_to_merge
-      - check-success=trivial
+
     actions:
       queue:
         name: default
