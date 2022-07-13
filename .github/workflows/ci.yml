@@ -24,7 +24,6 @@ jobs:
           echo "GITHUB_REF:  $GITHUB_REF"
           echo "GITHUB_REPOSITORY:  $GITHUB_REPOSITORY"
           echo "GITHUB_SHA:  $GITHUB_SHA"
-          sleep 1m
           
       - name: optional error
         if: ${{ contains(github.event.pull_request.labels.*.name, 'ci:error') }}
