@@ -3,37 +3,46 @@ queue_rules:
     conditions:
       - base=main
       - label=ci:ready_to_merge
+    
    
 pull_request_rules:
   - name: push to default merge queue
     conditions:
       - base=main
       - label=ci:ready_to_merge
-      - check-success=trivial
     actions:
       queue:
         name: default
+        require_branch_protection: true
         method: squash
+  -name: error reporting
+   conditions:
+     -check-failure=CI / Bazel (presubmit)
+     -check-failure=Hexagon / Hexagon Build Test (presubmit)
+     -check-failure=Xtensa / Fusion F1 Unit Tests (presubmit)
+     -check-failure=Check PR has Bug / PR has Bug
+     -check-failure=Check TfLite Files / Check PR Modifies TfLite Files
+     -check-failure=CI / Cortex-M (presubmit)
+     -check-failure=Xtensa / Hifi5 Unit Tests (presubmit)
+     -check-failure=CI / Code Style (presubmit)
+     -check-failure=Xtensa / Vision P6 Build (presubmit)
+     -check-failure=CI / Project Generation (presubmit)
+     -check-failure=CI / Makefile x86 (presubmit)
+   actions:
+     comment:
+       message: >
+         @{{author}}: Failure in {{check_failure}}. Click the details link
+         beside the appropriate entry in the check suite list below.
+       label:
+         add:
+           - ci:issue
+         remove:
+           - ci:ready_to_merge
 
-  - name: error reporting
-    conditions:
-      - check-failure=trivial
-    actions:
-      comment:
-        message: >
-          @{{author}}: Failure in {{check_failure}}. Click the details link
-          beside the appropriate entry in the check suite list below.
-      label:
-        add:
-          - ci:issue
-        remove:
-          - ci:ready_to_merge
-          
-  - name: remove mergify label
+  - name: remove ci:ready_to_merge label
     conditions:
       - merged
     actions:
       label:
         remove:
-          - ci:ready_to_merge 
-
+          - ci:ready_to_merge
