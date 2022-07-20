@@ -9,6 +9,10 @@ jobs:
         return 1
     - name: error trapping
       if: ${{ failure() }}
+      uses: JasonEtco/create-an-issue@v2
       env:
-        GITHUB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$GITHUB_CONTEXT"
+        WORKFLOW: ${{ github.workflow }}
+        RUN_NUMBER: ${{ github.run_number }}
+      with:
+        assignees: jwithers
+        filename: .github/workflow-error-template.md
