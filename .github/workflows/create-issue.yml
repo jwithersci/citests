@@ -1,18 +1,23 @@
 name: create-issue
 on:
-  pull_request:
+  status
+#  pull_request:
 #    types: [labeled, synchronize]
-    types: [labeled]
+#    types: [labeled]
       
 
 jobs:
   make-issue:
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ci:issue'))
+      github.event.state  == 'error' ||
+      github.event.state == 'failure'
 
     steps:
+      - env:
+          DESCRIPTION: ${{ github.event.description }}
+        run: |
+          echo The status is: $DESCRIPTION
       - name: checkout repo
         uses: actions/checkout@v2
       - name: dump context
