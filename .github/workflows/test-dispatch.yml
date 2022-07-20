@@ -13,6 +13,7 @@ jobs:
       env:
         WORKFLOW: ${{ github.workflow }}
         RUN_NUMBER: ${{ github.run_number }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         assignees: jwithers
         filename: .github/workflow-error-template.md
