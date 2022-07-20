@@ -8,5 +8,5 @@ jobs:
     - run: |
         return 1
     - name: error trapping
-      if: $ {{ failure() }}
+      if: ${{ failure() }}
       run: echo This Job Failed
