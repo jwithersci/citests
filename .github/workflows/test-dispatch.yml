@@ -9,4 +9,6 @@ jobs:
         return 1
     - name: error trapping
       if: ${{ failure() }}
-      run: echo This Job Failed
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
