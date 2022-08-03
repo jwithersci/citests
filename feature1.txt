@@ -1,3 +1,3 @@
 touch
 touch touch
-bad touch
+touch bad
