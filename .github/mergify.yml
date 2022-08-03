@@ -13,7 +13,9 @@ pull_request_rules:
       queue:
         name: default
         method: squash
-        commit_message_template: commit-msg-template.md
+        commit_message_template: |
+          {{ title }}
+          {{ body  }}
 
   - name: remove mergify label
     conditions:
