@@ -28,9 +28,10 @@ def create_issue(repo, flag_label, workflow, run_number):
     return(new_issue)
 
 
-def add_comment(issue):
+def add_comment(issue, run_number):
     dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     msg_string = "Error reoccurred: " + dt_string
+    msg_string += " run number: " + run_number
     issue.create_comment(msg_string) 
     return()
 
@@ -43,7 +44,7 @@ if __name__ == "__main__":
         create_issue(repo, FLAG_LABEL, WORKFLOW, RUN_NUMBER)
     else:
         for issue in tagged_issues:
-            add_comment(issue)
+            add_comment(issue, RUN_NUMBER)
     for issue in tagged_issues:
         print(issue.number)
         print(issue.closed_at)
