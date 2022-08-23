@@ -22,6 +22,6 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FLAG_LABEL: ci:bot_issue
         run: |
-          pip3 install github
+          pip3 install PyGithub
           python3 scripts/issue_on_error.py
 
