@@ -1,5 +1,5 @@
 on:
-  pull_request:
+  pull_request_target:
     types: [synchronize]
     branches:
       - main
@@ -16,3 +16,15 @@ jobs:
           cat << OBJECT
           ${{ toJson(github.event) }}
           OBJECT
+      - name: remove label
+        uses: actions/github-script@a3e7071a34d7e1f219a8a4de9a5e0a34d1ee1293
+        if: !(github.event.sender.login == 'mergify[bot]')
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'ci:action_test'
+            })
