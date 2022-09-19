@@ -18,7 +18,7 @@ jobs:
           OBJECT
       - name: remove label
         uses: actions/github-script@a3e7071a34d7e1f219a8a4de9a5e0a34d1ee1293
-        if: !(github.event.sender.login == 'mergify[bot]')
+        if: ${{ !(github.event.sender.login == 'mergify[bot]') }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
