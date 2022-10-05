@@ -33,7 +33,7 @@ jobs:
       - run: unzip sha.zip
       - run: |
           ls -alh
-          cat NR
+          cat prsha
           MY_SHA="$(cat prsha)"
           echo "PR_SHA=$(cat prsha)" >> $GITHUB_ENV
           echo "PR_LABELS=$(cat prlabels)" >> $GITHUB_ENV
