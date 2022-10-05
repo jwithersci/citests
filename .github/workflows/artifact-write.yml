@@ -21,7 +21,7 @@ jobs:
           path: sha/
       - name: get labels
         env:
-          LABES: join(github.event.pull_request.labels.*.name, ', ')
+          LABES: ${{ join(github.event.pull_request.labels.*.name, ', ') }}
         run: |
           echo $LABES
       - name: Dump GitHub context
