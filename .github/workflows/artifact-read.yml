@@ -33,4 +33,4 @@ jobs:
       - run: unzip sha.zip
       - run: |
           ls -alh
-          cat sha/NR
+          cat NR
