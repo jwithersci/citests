@@ -34,3 +34,5 @@ jobs:
       - run: |
           ls -alh
           cat NR
+          echo "PR_SHA=$(cat NR)" >> $GIHUB_ENV
+      - run: echo ${{ env.PR_SHA }}
