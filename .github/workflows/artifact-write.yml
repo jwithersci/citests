@@ -23,7 +23,7 @@ jobs:
         env:
           LABES: ${{ join(github.event.pull_request.labels.*.name, ', ') }}
         run: |
-          echo $LABES
+          echo ${{ join(github.event.pull_request.labels.*.name, ', ') }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
