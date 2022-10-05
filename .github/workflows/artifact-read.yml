@@ -30,16 +30,9 @@ jobs:
             });
             var fs = require('fs');
             fs.writeFileSync('${{github.workspace}}/sha.zip', Buffer.from(download.data));
-      - run: unzip sha.zip
       - run: |
-          ls -alh
-          cat prsha
-          MY_SHA="$(cat prsha)"
+          unzip sha.zip
           echo "PR_SHA=$(cat prsha)" >> $GITHUB_ENV
           echo "PR_LABELS=$(cat prlabels)" >> $GITHUB_ENV
       - run: echo ${{ env.PR_SHA }}
       - run: echo ${{ env.PR_LABELS }}
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
