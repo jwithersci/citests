@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: print vars
         run: |
-          echo "sha from magic github_sha: " ${{ GITHUB_SHA }}
+          echo "sha from magic github_sha: $GITHUB_SHA"
           echo "sha from long form: " ${{ github.event.pull_request.head.sha }}
       - name: save sha
         run: |
