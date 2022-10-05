@@ -35,5 +35,5 @@ jobs:
           ls -alh
           cat NR
           MY_SHA="$(cat NR)"
-          echo "PR_SHA=testval" >> $GIHUB_ENV
+          echo "PR_SHA=$(cat NR)" >> $GITHUB_ENV
       - run: echo ${{ env.PR_SHA }}
