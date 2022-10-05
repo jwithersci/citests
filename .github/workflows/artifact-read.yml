@@ -30,7 +30,7 @@ jobs:
             });
             var fs = require('fs');
             fs.writeFileSync('${{github.workspace}}/sha.zip', Buffer.from(download.data));
-      - run: unzip pr.zip
+      - run: unzip sha.zip
       - run: |
           ls -alh
           cat sha/NR
