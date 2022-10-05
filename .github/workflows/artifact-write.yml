@@ -21,7 +21,8 @@ jobs:
           path: sha/
       - name: get labels
         run: |
-          echo "${github.event.pull_request.labels.*.name[@]}"
+          names=${{ github.event.pull_request.labels.*.name }}
+          echo "${names[@]}"
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
