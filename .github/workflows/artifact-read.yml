@@ -37,3 +37,7 @@ jobs:
           MY_SHA="$(cat NR)"
           echo "PR_SHA=$(cat NR)" >> $GITHUB_ENV
       - run: echo ${{ env.PR_SHA }}
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
