@@ -14,14 +14,13 @@ jobs:
       - name: save sha
         run: |
           mkdir -p ./sha
-          echo ${{ github.event.pull_request.head.sha }} > ./sha/NR
+          echo ${{ github.event.pull_request.head.sha }} > ./sha/prsha
+          echo ${{ join(github.event.pull_request.labels.*.name, ', ') }} > ./sha/prlabels
       - uses: actions/upload-artifact@v2
         with:
           name: sha
           path: sha/
       - name: get labels
-        env:
-          LABES: ${{ join(github.event.pull_request.labels.*.name, ', ') }}
         run: |
           echo ${{ join(github.event.pull_request.labels.*.name, ', ') }}
       - name: Dump GitHub context

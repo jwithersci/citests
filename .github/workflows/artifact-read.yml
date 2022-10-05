@@ -35,8 +35,10 @@ jobs:
           ls -alh
           cat NR
           MY_SHA="$(cat NR)"
-          echo "PR_SHA=$(cat NR)" >> $GITHUB_ENV
+          echo "PR_SHA=$(cat prsha)" >> $GITHUB_ENV
+          echo "PR_LABELS=$(cat prlabels)" >> $GITHUB_ENV
       - run: echo ${{ env.PR_SHA }}
+      - run: echo ${{ env.PR_LABELS }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
