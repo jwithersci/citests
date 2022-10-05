@@ -1,0 +1,22 @@
+name: artifact-write
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  write-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print vars
+        run: |
+          echo "sha from magic github_sha: " ${{ GITHUB_SHA }}
+          echo "sha from long form: " ${{ github.event.pull_request.head.sha }}
+      - name: save sha
+        run: |
+          mkdir -p ./sha
+          echo ${{ github.event.pull_request.head.sha }} > ./sha/NR
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sha
+          path: sha/
+          
