@@ -20,10 +20,8 @@ jobs:
           name: sha
           path: sha/
       - name: get labels
-        env:
-          LABES: ${{ github.event.pull_request.labels.*.name }}
         run: |
-          echo $LABES
+          echo ${{ github.event.pull_request.labels.*.name }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
