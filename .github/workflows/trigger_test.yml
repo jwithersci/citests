@@ -6,6 +6,13 @@ on:
       - labeled
 
 jobs:
+  dump-it:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
   no-labels:
     runs-on: ubuntu-latest
     if: ${{ !(contains(github.event.pull_request.labels.*.name, 'bug') ||
