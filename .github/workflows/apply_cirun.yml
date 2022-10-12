@@ -7,9 +7,9 @@
 #      allows mergify to update the PR and keep the merging process moving
 #      along.
 
-on:
-  pull_request_target:
-    types: [labeled, synchronize]
+#on:
+#  pull_request_target:
+#    types: [labeled, synchronize]
 
 jobs:
   apply-label:

@@ -1,0 +1,19 @@
+name: Tests Entry Point
+on:
+  pull_request_target:
+    types:
+      - synchronize
+      - labeled
+
+jobs:
+  no-labels:
+  if: ${{ !(contains(github.event.pull_request.labels.*.name, 'bug') ||
+      contains(github.event.pull_request.labels.*.name, 'question')) }}
+  run: |
+    echo "no trigger labels"
+    exit 55
+  some-labels:
+  if: ${{ (contains(github.event.pull_request.labels.*.name, 'bug') ||
+      contains(github.event.pull_request.labels.*.name, 'question')) }}
+  run: |
+    echo "YES trigger labels"
