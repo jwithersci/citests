@@ -7,13 +7,15 @@ on:
 
 jobs:
   no-labels:
-  if: ${{ !(contains(github.event.pull_request.labels.*.name, 'bug') ||
-      contains(github.event.pull_request.labels.*.name, 'question')) }}
-  run: |
-    echo "no trigger labels"
-    exit 55
+    if: ${{ !(contains(github.event.pull_request.labels.*.name, 'bug') ||
+        contains(github.event.pull_request.labels.*.name, 'question')) }}
+    steps:
+      - run: |
+        echo "no trigger labels"
+        exit 55
   some-labels:
-  if: ${{ (contains(github.event.pull_request.labels.*.name, 'bug') ||
-      contains(github.event.pull_request.labels.*.name, 'question')) }}
-  run: |
-    echo "YES trigger labels"
+    if: ${{ (contains(github.event.pull_request.labels.*.name, 'bug') ||
+        contains(github.event.pull_request.labels.*.name, 'question')) }}
+    steps:
+      - run: |
+        echo "YES trigger labels"
