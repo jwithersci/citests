@@ -17,8 +17,8 @@ jobs:
       - run: echo "we shouldn't see this"
   some-labels:
     runs-on: ubuntu-latest
-    if: ${{ (contains(github.event.pull_request.labels.*.name, 'bug') ||
-        contains(github.event.pull_request.labels.*.name, 'question')) }}
+    if: ${{ (contains(github.event.pull_request.labels.*.name, 'bug') &&
+        !contains(github.event.pull_request.labels.*.name, 'question')) }}
     steps:
       - run: |
           echo "YES trigger labels"
