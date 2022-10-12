@@ -17,6 +17,8 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: set-sha
         run: |
+          echo "PR_SHA=$(echo $GITHUB_SHA)" >> $GITHUB_ENV
       - name: show-sha
         run: |
+          echo ${{ env.PR_SHA}}
       
