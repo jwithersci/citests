@@ -1,0 +1,10 @@
+name: Caller Test
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  caller-1:
+   uses: ./.github/workflows/called-1.yml
+   with:
+    var1: "hoopyfrood"

@@ -1,0 +1,17 @@
+name: called-1
+
+on:
+  workflow_call:
+    inputs:
+      var1:
+        required: true
+        type: string
+        default: angryfrood
+
+jobs:
+  CalledOne:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Passed var1: " ${{ var1 }}
+        with: 
+          var1: ${{ inputs.var1 }}
