@@ -14,4 +14,4 @@ jobs:
     steps:
       - name: spewing
         run: echo |
-          "'Passed var1:  ${{ inputs.var1 }}'"
+          "Passed var1:''  ${{ inputs.var1 }}"
