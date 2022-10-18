@@ -12,4 +12,5 @@ jobs:
   CalledOne:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Passed var1:  ${{ inputs.var1 }}"
+      - name: spewing
+        run: echo "Passed var1:  ${{ inputs.var1 }}"
