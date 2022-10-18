@@ -9,15 +9,15 @@ on:
         default: angryfrood
     outputs:
       varout:
-        value: ${{ jobs.CalledOne.outputs.output1}}
+        value: ${{ jobs.calledone.outputs.output1}}
 
 jobs:
-  CalledOne:
+  calledone:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.spewing.outputs.myvar }}
     steps:
-      - name: spewing
+      - id: spewing
         run: |
           echo "Passed var1: ${{ inputs.var1 }}"
           echo "myvar=FromCaller1" >> $GITHUB_OUTPUT
