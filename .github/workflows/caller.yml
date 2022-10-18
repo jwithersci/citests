@@ -5,6 +5,6 @@ on:
 
 jobs:
   caller-1:
-   uses: jwithers/citests/.github/workflows/called-1.yml@main
-   with:
-    var1: "hoopyfrood"
+    uses: jwithers/citests/.github/workflows/called-1.yml@main
+    with:
+      var1: "hoopyfrood"
