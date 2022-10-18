@@ -7,12 +7,17 @@ on:
         required: true
         type: string
         default: angryfrood
+    outputs:
+      varout:
+        value: ${{ jobs.CalledOne.outputs.output1}}
 
 jobs:
   CalledOne:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.spewing.outputs.myvar }}
     steps:
       - name: spewing
         run: |
           echo "Passed var1: ${{ inputs.var1 }}"
-          echo "MY_VAR=FromCaller1" >> $GITHUB_ENV
+          echo "myvar=FromCaller1" >> $GITHUB_OUTPUT
