@@ -13,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: spewing
-        run: echo |
-          "Passed var1:\  ${{ inputs.var1 }}"
+        run: |
+          echo "Passed var1: ${{ inputs.var1 }}"
