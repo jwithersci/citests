@@ -1,14 +1,20 @@
 name: artifact-read
 
-on: 
-  workflow_run:
-    workflows: ["artifact-write"]
-    types:
-      - completed
+on:
+  workflow_call:
 
+    outputs:
+      stored-sha:
+        value: ${{ jobs.get-artifact.outputs.output1 }}
+      stored-labels:
+        value: ${{ jobs.get-artifact.outputs.output2 }}
+      
 jobs:
   get-artifact:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.write-var.outputs.stored-sha }}
+      output2: ${{ steps.write-var.outputs.stored-labels }}
     steps:
       - name: 'Download artifact'
         uses: actions/github-script@v6
@@ -30,9 +36,11 @@ jobs:
             });
             var fs = require('fs');
             fs.writeFileSync('${{github.workspace}}/sha.zip', Buffer.from(download.data));
-      - run: |
+      - id: write-var
+        name: 'Write Vars'
+        run: |
           unzip sha.zip
-          echo "PR_SHA=$(cat prsha)" >> $GITHUB_ENV
-          echo "PR_LABELS=$(cat prlabels)" >> $GITHUB_ENV
-      - run: echo ${{ env.PR_SHA }}
-      - run: echo ${{ env.PR_LABELS }}
+          echo "stored-sha=$(cat prsha)" >> $GITHUB_OUTPUT
+          echo "stored-labels=$(cat prlabels)" >> $GITHUB_OUTPUT
+      - run: echo ${{ steps.write-var.outputs.stored-sha }}
+      - run: echo ${{ steps.write-var.outputs.stored-labels }}

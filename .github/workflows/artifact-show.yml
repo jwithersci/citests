@@ -1,0 +1,18 @@
+on:
+  workflow_run:
+    workflows: [artifact-write]
+    types:
+      - completed
+
+jobs:
+  read-vars:
+    uses: jwithers/citests/.github/workflows/artifact-read.yml@main
+
+  show-vars:
+    runs-on: ubuntu-latest
+    needs: read-vars
+    steps:
+      - name: showme
+        run: |
+          echo ${{ needs.read-vars.outputs.stored-sha }}
+          echo ${{ needs.read-vars.outputs.stored-labels }}
