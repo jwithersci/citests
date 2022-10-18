@@ -8,3 +8,9 @@ jobs:
     uses: jwithers/citests/.github/workflows/called-1.yml@main
     with:
       var1: "hoopyfrood"
+  show-var:
+    runs-on: ubuntu-latest
+    steps:
+      - name: showme
+        run: |
+          echo ${{ env.MY_VAR }}
