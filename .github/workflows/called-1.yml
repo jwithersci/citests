@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       var1:
-        required: false
+        required: true
         type: string
         default: angryfrood
 
@@ -13,4 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: spewing
-        run: echo "Passed var1  ${{ inputs.var1 }}"
+        run: echo |
+          "Passed var1:  ${{ inputs.var1 }}"
