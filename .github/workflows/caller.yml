@@ -5,6 +5,7 @@ on:
 
 jobs:
   caller-1:
+    if: github.repository == 'octo-org/octo-repo-prod'
     uses: jwithers/citests/.github/workflows/called-1.yml@main
     with:
       var1: "hoopyfrood"
