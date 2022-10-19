@@ -5,7 +5,7 @@ on:
 
 jobs:
   caller-1:
-# and this is a random comment for testing.
+    # and this is a random comment for testing.
     if: github.repository == 'jwithers/citests'
     uses: jwithers/citests/.github/workflows/called-1.yml@main
     with:
