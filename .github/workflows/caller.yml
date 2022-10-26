@@ -9,7 +9,7 @@ jobs:
     if: github.repository == 'jwithers/citests'
     uses: jwithers/citests/.github/workflows/called-1.yml@main
     with:
-      var1: ${{ GITHUB_SHA }}
+      var1: $GITHUB_SHA
   show-var:
     runs-on: ubuntu-latest
     needs: caller-1
