@@ -17,4 +17,3 @@ jobs:
       - name: showme
         run: |
           echo ${{ needs.caller-1.outputs.varout }}
-          echo ${{ GITHUB_SHA }}
