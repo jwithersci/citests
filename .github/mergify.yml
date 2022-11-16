@@ -13,6 +13,7 @@ pull_request_rules:
       queue:
         name: default
         method: squash
+        checks_timeout: 2 h
         commit_message_template: |
           {{ title }}
           {{ body_raw  }}
