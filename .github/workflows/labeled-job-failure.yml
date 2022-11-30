@@ -12,6 +12,10 @@ jobs:
     name: make it fail
     steps:
       - uses: actions/checkout@v2
+      - name: dump github context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: fail command
         run: exit 55
       - name: error trapping
@@ -23,6 +27,7 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FLAG_LABEL: ci:bot_issue
           PR_NUMBER: ${{ github.event.number }}
+          PR_LINK: ${{github.event.pull_request._links.html.href}}
         run: |
           pip3 install PyGithub
           python3 scripts/pr_issue_on_error.py
