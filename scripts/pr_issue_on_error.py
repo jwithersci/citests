@@ -19,6 +19,7 @@ REPO = os.environ['REPO']
 WORKFLOW = os.environ['WORKFLOW']
 FLAG_LABEL = os.environ['FLAG_LABEL']
 RUN_NUMBER = os.environ['RUN_NUMBER']
+RUN_ID = os.environ['RUN_ID']
 PR_NUMBER = os.environ['PR_NUMBER']
 PR_LINK = os.environ['PR_LINK']
 
@@ -31,10 +32,12 @@ def get_tagged_issues(repo, flag_label, pr_number):
             tagged_issues.append(issue)
     return(tagged_issues)
 
-def create_issue(repo, flag_label, workflow, run_number, pr_number, pr_link):
+def create_issue(repo, flag_label, workflow, run_number, run_id, pr_number, pr_link):
+    run_link = f"http://github.com/{repo}/actions/runs/{run_id}"
     body_string = f"PR {pr_number} ({pr_link}) had a CI failure: \n"
-    body_string += f"{workflow} run number {run_number} failed.\n"
-    body_string += "Please examine the run itself for details.\n\n"
+    body_string += f"{workflow} run number {run_number} failed. \n"
+    body_string += "Please examine the run itself for details:\n"
+    body_string += f"({run_link})\n\n"
     body_string += "This issue has been automatically generated for "
     body_string += "notification purposes."
 
@@ -57,7 +60,7 @@ if __name__ == "__main__":
     repo = g.get_repo(REPO)
     tagged_issues = get_tagged_issues(repo, FLAG_LABEL, PR_NUMBER)
     if not tagged_issues:
-        create_issue(repo, FLAG_LABEL, WORKFLOW, RUN_NUMBER, PR_NUMBER, PR_LINK)
+        create_issue(repo, FLAG_LABEL, WORKFLOW, RUN_NUMBER, RUN_ID, PR_NUMBER, PR_LINK)
     else:
         for issue in tagged_issues:
             add_comment(issue, RUN_NUMBER, WORKFLOW)
