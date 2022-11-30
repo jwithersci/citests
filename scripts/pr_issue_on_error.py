@@ -35,8 +35,7 @@ def get_tagged_issues(repo, flag_label, pr_number):
 def create_issue(repo, repo_name, flag_label, workflow, run_number, run_id, pr_number, pr_link):
     run_link = f"http://github.com/{repo_name}/actions/runs/{run_id}"
     body_string = f"PR {pr_number} ({pr_link}) had a CI failure: \n"
-    body_string += f"{workflow} [run number {run_number}]({run_link}) failed. \n"
-    body_string += "Please examine the run itself for details:\n\n"
+    body_string += f"{workflow} [run number {run_number}]({run_link}) failed. \n\n"
     body_string += "This issue has been automatically generated for "
     body_string += "notification purposes."
 
@@ -49,7 +48,7 @@ def create_issue(repo, repo_name, flag_label, workflow, run_number, run_id, pr_n
 def add_comment(issue, repo_name, run_number, run_id, workflow):
     run_link = f"http://github.com/{repo_name}/actions/runs/{run_id}"
     dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    msg_string = f"Error reoccurred:  {dt_string}/n"
+    msg_string = f"Error reoccurred:  {dt_string}\n"
     msg_string += f"{workflow} [run number {run_number}]({run_link})"
     issue.create_comment(msg_string) 
     return()
