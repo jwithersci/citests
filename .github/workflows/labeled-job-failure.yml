@@ -22,7 +22,7 @@ jobs:
           RUN_NUMBER: ${{ github.run_number }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FLAG_LABEL: ci:bot_issue
-          PR_NUMBER: $${{ github.event.number }}
+          PR_NUMBER: ${{ github.event.number }}
         run: |
           pip3 install PyGithub
           python3 scripts/pr_issue_on_error.py
