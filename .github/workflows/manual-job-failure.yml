@@ -1,0 +1,27 @@
+name: Failure test
+
+on:
+
+  # Allow manually triggering the workflow.
+  workflow_dispatch: {}
+
+jobs:
+  generate_integration_tests:
+    runs-on: ubuntu-latest
+    name: make it fail
+    steps:
+      - uses: actions/checkout@v2
+      - name: fail command
+        run: exit 55
+      - name: error trapping
+        if: ${{ failure() }}
+        env:
+          REPO: ${{ github.repository}}
+          WORKFLOW: ${{ github.workflow }}
+          RUN_NUMBER: ${{ github.run_number }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FLAG_LABEL: ci:bot_issue
+        run: |
+          pip3 install PyGithub
+          python3 scripts/workflow_issue_on_error.py
+

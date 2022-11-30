@@ -1,9 +1,9 @@
-name: Failure test
+name: Failure Test Labeled
 
 on:
+  pull_request:
+    types: [labeled]
 
-  # Allow manually triggering the workflow.
-  workflow_dispatch: {}
 
 jobs:
   generate_integration_tests:
@@ -21,7 +21,8 @@ jobs:
           RUN_NUMBER: ${{ github.run_number }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FLAG_LABEL: ci:bot_issue
+          PR_NUMBER: $${{ github.event.number }}
         run: |
           pip3 install PyGithub
-          python3 scripts/issue_on_error.py
+          python3 scripts/pr_issue_on_error.py
 

@@ -1,6 +1,6 @@
 name: create-issue
-on:
-  status
+#on:
+#  status
 #  pull_request:
 #    types: [labeled, synchronize]
 #    types: [labeled]
