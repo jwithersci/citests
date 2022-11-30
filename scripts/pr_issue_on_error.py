@@ -35,9 +35,8 @@ def get_tagged_issues(repo, flag_label, pr_number):
 def create_issue(repo, repo_name, flag_label, workflow, run_number, run_id, pr_number, pr_link):
     run_link = f"http://github.com/{repo_name}/actions/runs/{run_id}"
     body_string = f"PR {pr_number} ({pr_link}) had a CI failure: \n"
-    body_string += f"{workflow} run number {run_number} failed. \n"
-    body_string += "Please examine the run itself for details:\n"
-    body_string += f"[{run_number}]({run_link})\n\n"
+    body_string += f"{workflow} [run number {run_number}]({run_link}) failed. \n"
+    body_string += "Please examine the run itself for details:\n\n"
     body_string += "This issue has been automatically generated for "
     body_string += "notification purposes."
 
@@ -47,10 +46,11 @@ def create_issue(repo, repo_name, flag_label, workflow, run_number, run_id, pr_n
     return(new_issue)
 
 
-def add_comment(issue, run_number, workflow):
+def add_comment(issue, repo_name, run_number, run_id, workflow):
+    run_link = f"http://github.com/{repo_name}/actions/runs/{run_id}"
     dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    msg_string = "Error reoccurred: " + dt_string
-    msg_string += workflow + " run number: " + run_number
+    msg_string = f"Error reoccurred:  {dt_string}/n"
+    msg_string += f"{workflow} [run number {run_number}]({run_link})"
     issue.create_comment(msg_string) 
     return()
 
@@ -63,7 +63,7 @@ if __name__ == "__main__":
         create_issue(repo, REPO_NAME, FLAG_LABEL, WORKFLOW, RUN_NUMBER, RUN_ID, PR_NUMBER, PR_LINK)
     else:
         for issue in tagged_issues:
-            add_comment(issue, RUN_NUMBER, WORKFLOW)
+            add_comment(issue, REPO_NAME, RUN_NUMBER, RUN_ID, WORKFLOW)
 
     # occasionally have had api ignore the 'open' state filter on
     # the get_issues request, this helps troubleshooting.
