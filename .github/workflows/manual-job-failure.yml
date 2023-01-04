@@ -11,8 +11,12 @@ jobs:
     name: make it fail
     steps:
       - uses: actions/checkout@v2
+      - name: Dump Github Context
+        env: GITHUB_CONTEXT ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: fail command
-        run: exit 55
+        # not failing for this test
+        run: exit 0
       - name: error trapping
         if: ${{ failure() }}
         env:
