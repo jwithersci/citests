@@ -30,10 +30,11 @@ def create_issue(repo, repo_name, flag_label, workflow, run_number, run_id):
     return(new_issue)
 
 
-def add_comment(issue, run_number):
+def add_comment(issue, repo_name, run_id, run_number):
+    run_link = f"http://github.com/{repo_name}/actions/runs/{run_id}"
     dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    msg_string = "Error reoccurred: " + dt_string
-    msg_string += " run number: " + run_number
+    msg_string = f"Error reoccurred: {dt_string}\n"
+    msg_string += f"[Run number: {run_number}]({run_link})\n"
     issue.create_comment(msg_string) 
     return()
 
@@ -46,7 +47,7 @@ if __name__ == "__main__":
         create_issue(repo, REPO_NAME, FLAG_LABEL, WORKFLOW, RUN_NUMBER, RUN_ID)
     else:
         for issue in tagged_issues:
-            add_comment(issue, RUN_NUMBER)
+            add_comment(issue, REPO_NAME, RUN_ID, RUN_NUMBER)
     for issue in tagged_issues:
         print(issue.number)
         print(issue.closed_at)
