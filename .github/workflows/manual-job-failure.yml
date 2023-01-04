@@ -12,7 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Dump Github Context
-        env: GITHUB_CONTEXT ${{ toJSON(github) }}
+        env: 
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
       - name: fail command
         # not failing for this test
