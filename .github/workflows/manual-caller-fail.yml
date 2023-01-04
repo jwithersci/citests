@@ -11,8 +11,19 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-  call-fail:
-    uses: ./.github/workflows/called-fail.yml
+#  call-fail:
+#    uses: ./.github/workflows/called-fail.yml
 
   call-inspect:
     uses: ./.github/workflows/called-inspect.yml
+
+  call-error-handler:
+    if: ${{ failure() }}
+    uses: ./.github/workflows/called-error-trap.yml
+    with:
+      repo: ${{ github.repository }}
+      workflow: ${{ github.workflow }}
+      run_id: ${{ github.run_id }}
+      run_number: ${{ github.run_number }}
+      token: ${{ secrets.GITHUB_TOKEN }}
+      flag_label: ci:bot_issue
