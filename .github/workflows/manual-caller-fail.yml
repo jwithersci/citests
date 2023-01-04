@@ -25,5 +25,6 @@ jobs:
       workflow: ${{ github.workflow }}
       run_id: ${{ github.run_id }}
       run_number: ${{ github.run_number }}
-      token: ${{ secrets.GITHUB_TOKEN }}
       flag_label: ci:bot_issue
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
