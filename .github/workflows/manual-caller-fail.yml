@@ -1,0 +1,15 @@
+name: Calling Fail Test
+
+on: workflow_dispatch
+
+jobs:
+  local_inspect:
+    runs-on: ubuntu-latest
+    name: top level inspect
+    steps:
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+  call-inspect:
+    uses: ./.github/workflows/called-inspect.yml
