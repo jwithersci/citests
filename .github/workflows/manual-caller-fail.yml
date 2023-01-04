@@ -8,6 +8,7 @@ jobs:
     name: top level inspect
     steps:
       - env:
+          GITHUB_CONTEXT: ${{ toJSON(jobs) }}
         run: echo "$GITHUB_CONTEXT"
 
   call-fail:
