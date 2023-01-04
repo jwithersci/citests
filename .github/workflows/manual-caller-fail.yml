@@ -18,7 +18,8 @@ jobs:
     uses: ./.github/workflows/called-inspect.yml
 
   call-error-handler:
-    if: ${{ failure() }}
+    needs: [local_inspect, call-fail, call-inspect]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
     uses: ./.github/workflows/called-error-trap.yml
     with:
       repo: ${{ github.repository }}
