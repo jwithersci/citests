@@ -20,7 +20,7 @@ jobs:
       - name: error trapping
         if: ${{ failure() }}
         env:
-          REPO_NAME: ${{ github.repository}}
+          REPO: ${{ github.repository}}
           WORKFLOW: ${{ github.workflow }}
           RUN_ID: ${{ github.run_id }}
           RUN_NUMBER: ${{ github.run_number }}
