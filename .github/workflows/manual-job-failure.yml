@@ -1,4 +1,4 @@
-name: Failure test
+name: Failure Test 2
 
 on:
 
@@ -16,13 +16,13 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
       - name: fail command
-        # not failing for this test
-        run: exit 0
+        run: exit 1
       - name: error trapping
         if: ${{ failure() }}
         env:
-          REPO: ${{ github.repository}}
+          REPO_NAME: ${{ github.repository}}
           WORKFLOW: ${{ github.workflow }}
+          RUN_ID: ${{ github.run_id }}
           RUN_NUMBER: ${{ github.run_number }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FLAG_LABEL: ci:bot_issue

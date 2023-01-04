@@ -3,10 +3,11 @@ from datetime import datetime
 import os
 
 TOKEN = os.environ['TOKEN']
-REPO = os.environ['REPO']
+REPO_NAME = os.environ['REPO']
 WORKFLOW = os.environ['WORKFLOW']
 FLAG_LABEL = os.environ['FLAG_LABEL']
 RUN_NUMBER = os.environ['RUN_NUMBER']
+RUN_ID = os.environ['RUN_ID']
 
 def get_tagged_issues(repo, flag_label, workflow):
     issues = repo.get_issues(state='open', labels=[flag_label])
@@ -16,8 +17,9 @@ def get_tagged_issues(repo, flag_label, workflow):
             tagged_issues.append(issue)
     return(tagged_issues)
 
-def create_issue(repo, flag_label, workflow, run_number):
-    body_string = f"{workflow} run number {run_number} failed.\n"
+def create_issue(repo, repo_name, flag_label, workflow, run_number, run_id):
+    run_link = f"http://github.com/{repo_name}/actions/runs/{run_id}"
+    body_string = f"{workflow} [run number {run_number}]({run_link}) failed.\n"
     body_string += "Please examine the run itself for details.\n\n"
     body_string += "This issue has been automatically generated for "
     body_string += "notification purposes."
@@ -38,10 +40,10 @@ def add_comment(issue, run_number):
 if __name__ == "__main__":
     
     g = Github(TOKEN)
-    repo = g.get_repo(REPO)
+    repo = g.get_repo(REPO_NAME)
     tagged_issues = get_tagged_issues(repo, FLAG_LABEL, WORKFLOW)
     if not tagged_issues:
-        create_issue(repo, FLAG_LABEL, WORKFLOW, RUN_NUMBER)
+        create_issue(repo, REPO_NAME, FLAG_LABEL, WORKFLOW, RUN_NUMBER, RUN_ID)
     else:
         for issue in tagged_issues:
             add_comment(issue, RUN_NUMBER)
