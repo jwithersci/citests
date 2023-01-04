@@ -1,0 +1,9 @@
+name: called-fail
+on: workflow_call
+
+jobs:
+  make_it_fail:
+    runs-on: ubuntu-latest
+    name: Return Failure
+    steps:
+      - run: exit 1

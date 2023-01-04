@@ -1,0 +1,36 @@
+name: called-error-trap
+on:
+  workflow_call:
+    inputs:
+      repo:
+        type: string
+      workflow:
+        type: string
+      run_id:
+        type: string
+      run_number:
+        type: string
+      flag_label:
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  error-trap:
+    runs-on: ubuntu-latest
+    name: Error Trap
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Reporting Script
+        env:
+          REPO: ${{ inputs.repo }}
+          WORKFLOW: ${{ inputs.workflow }}
+          RUN_ID: ${{ inputs.run_id }}
+          RUN_NUMBER: ${{ inputs.run_number }}
+          TOKEN: ${{ secrets.token }}
+          FLAG_LABEL: ${{ inputs.flag_label }}
+        run: |
+          pip3 install PyGithub
+          python3 scripts/workflow_issue_on_error.py
+
