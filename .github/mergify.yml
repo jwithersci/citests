@@ -13,7 +13,6 @@ pull_request_rules:
       queue:
         name: default
         method: squash
-        checks_timeout: 2 h
         commit_message_template: |
           {{ title }} ([#{{ number }}](http://github.com/jwithers/citests/pull/{{ number }}))
           {{ body_raw  }}
