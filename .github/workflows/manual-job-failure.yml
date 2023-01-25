@@ -25,6 +25,7 @@ jobs:
           RUN_NUMBER: ${{ github.run_number }}
           FLAG_LABEL: ci:bot_issue
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.run_id }}
         run: |
           gh issue list
           python3 scripts/issue_on_error.py
