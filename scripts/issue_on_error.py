@@ -67,7 +67,7 @@ if __name__ == "__main__":
         create_issue(FLAG_LABEL, WORKFLOW, RUN_NUMBER, RUN_ID, REPO_NAME)
     else:
         for issue in tagged_issues:
-            add_comment(issue["number"], RUN_NUMBER, RUN_ID, REPO_NAME)
+            add_comment(str(issue["number"]), RUN_NUMBER, RUN_ID, REPO_NAME)
     for issue in tagged_issues:
         print(issue["number"])
         
