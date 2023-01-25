@@ -17,16 +17,17 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: fail command
         run: exit 1
-      - name: error trapping
-        if: ${{ failure() }}
-        env:
-          REPO: ${{ github.repository}}
-          WORKFLOW: ${{ github.workflow }}
-          RUN_NUMBER: ${{ github.run_number }}
-          FLAG_LABEL: ci:bot_issue
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUN_ID: ${{ github.run_id }}
-        run: |
-          gh issue list
-          python3 scripts/issue_on_error.py
+
+  issue-on-error:
+    needs: [generate_integration_tests]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    uses: ./.github/workflows/issue_on_error.yml
+    with:
+      repo: ${{ github.repository }}
+      workflow: ${{ github.workflow }}
+      run_id: ${{ github.run_id }}
+      run_number: ${{ github.run_number }}
+      flag_label: ci:bot_issue
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
 
