@@ -31,7 +31,7 @@ def get_tagged_issues(flag_label, workflow):
     issues = json.loads(issues)
     tagged_issues =[]
     for issue in issues:
-        if workflow in issue.body:
+        if workflow in issue["body"]:
             tagged_issues.append(issue)
     return(tagged_issues)
 
