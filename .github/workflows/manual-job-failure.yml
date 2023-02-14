@@ -1,4 +1,4 @@
-name: Failure Test 2
+name: Manual Job Failure
 
 on:
 
