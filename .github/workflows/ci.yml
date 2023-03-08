@@ -16,6 +16,8 @@ jobs:
       
     name: trivial
     steps:
+      - name: In Main
+        run: echo "WE ARE IN MAIN"
       - name: show selected vars
         run: |
           echo "GITHUB_ACTOR: $GITHUB_ACTOR"
