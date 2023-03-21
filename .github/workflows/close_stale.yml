@@ -15,14 +15,14 @@ jobs:
     steps:
       - uses: actions/stale@v7
         with:
-          any-of-labels: 'bug,'
+          any-of-labels: 'bug'
           stale-issue-message: >
             "This issue is stale because it has been open 40
             days with no activity. Remove the stale label or
             comment or this will be closed in 5 days"
           stale-pr-message: >
             "This PR is stale because it has been open 40 days
-             with no activity.""
+             with no activity."
           close-issue-message: 'This issue was closed because it has been stalled for 5 days with no activity.'
           days-before-stale: 40
           days-before-close: 5
