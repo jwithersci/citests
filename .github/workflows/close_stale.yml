@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/stale@v7
         with:
-          any-of-labels: 'bug'
+          any-of-labels: 'bug,'
           stale-issue-message: >
             "This issue is stale because it has been open 40
             days with no activity. Remove the stale label or
